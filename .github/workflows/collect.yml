@@ -34,9 +34,10 @@ jobs:
         run: |
           echo "ROOTDIR=Container-Collection"
           echo "ROOTDIR=$ROOTDIR" >> $GITHUB_ENV
+          export ROOTDIR=Container-Collection
 
-      - name: Run Collection Script for $ROOTDIR.txt
-        run: ./collect.sh $ROOTDIR.txt
+      - name: Run Collection Script for ${{ env.ROOTDIR }}.txt
+        run: ./collect.sh ${{ env.ROOTDIR }}
 
       - name: Install mkisofs
         run: |
