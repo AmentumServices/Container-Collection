@@ -32,12 +32,12 @@ do
   gh release download -p "*" -D $DEST -R $REPO
   
   if [ $? ];then
-    echo -e "\nDownload Complete!"
+    echo -e "Download Complete!"
   else
     echo "ERROR!"
   fi
 
-  ls -Alht $DEST
+  ls -Alht $DEST/*
 
 done < $1
 

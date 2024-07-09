@@ -33,8 +33,9 @@ jobs:
       - name: Run Collection Script for Container-Collection.txt
         run: |
           ./collect.sh Container-Collection.txt
-          echo "$ROOTDIR"
-          
+          echo "ROOTDIR=$ROOTDIR"
+          echo "ROOTDIR=$ROOTDIR" >> $GITHUB_ENV
+
       - name: Install mkisofs
         run: |
           sudo apt-get update -y
