@@ -54,7 +54,7 @@ jobs:
             ${{ steps.vars.outputs.ROOTDIR }}
 
       - name: Implant MD5 sum into iso
-        run: implantmd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
+        run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
       
       - name: Generate Hash
         run: sha256sum \
@@ -101,7 +101,7 @@ jobs:
       - name: Install mkisofs
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y mkisofs
+          sudo apt-get install -y mkisofs isomd5sum
       
       - name: Make ISO
         run: |
@@ -113,8 +113,8 @@ jobs:
             ${{ steps.vars.outputs.ROOTDIR }}
 
       - name: Implant MD5 sum into iso
-        run: implantmd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
-        
+        run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
+
       - name: Generate Hash
         run: sha256sum \
           ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
