@@ -21,7 +21,7 @@ jobs:
           echo -e "\n$GITHUB_OUTPUT\n"
           cat $GITHUB_OUTPUT
 
-  Container-Collection:
+  Container-Images:
     needs: [Date]
     runs-on: ubuntu-latest
     env:
@@ -33,10 +33,10 @@ jobs:
       - name: Set ROOTDIR
         id: vars
         run: |
-          echo "ROOTDIR=Container-Collection"
-          echo "ROOTDIR=Container-Collection" >> $GITHUB_OUTPUT
+          echo "ROOTDIR=Container-Images"
+          echo "ROOTDIR=Container-Images" >> $GITHUB_OUTPUT
 
-      - name: Run Collection Script for Container-Collection.txt
+      - name: Run Collection Script for Container-Images.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
 
       - name: Install mkisofs
@@ -69,7 +69,7 @@ jobs:
           login_endpoint: 'login.microsoftonline.us'
           graph_endpoint: 'graph.microsoft.us'
 
-  Atlassian-Containers:
+  Atlassian-Images:
     needs: [Date]
     runs-on: ubuntu-latest
     env:
@@ -81,10 +81,10 @@ jobs:
       - name: Set ROOTDIR
         id: vars
         run: |
-          echo "ROOTDIR=Atlassian-Containers"
-          echo "ROOTDIR=Atlassian-Containers" >> $GITHUB_OUTPUT
+          echo "ROOTDIR=Atlassian-Images"
+          echo "ROOTDIR=Atlassian-Images" >> $GITHUB_OUTPUT
 
-      - name: Run Collection Script for Container-Collection.txt
+      - name: Run Collection Script for Atlassian-Images.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
 
       - name: Install mkisofs
