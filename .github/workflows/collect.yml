@@ -30,9 +30,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Run Collection Script for Base
-        run: ./collect.sh Container-Collection.txt
-
+      - name: Run Collection Script for Container-Collection.txt
+        run: |
+          ./collect.sh Container-Collection.txt
+          echo "$ROOTDIR"
+          
       - name: Install mkisofs
         run: |
           sudo apt-get update -y
@@ -72,7 +74,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Run Collection Script for Base
+      - name: Run Collection Script for Atlassian-Containers.txt
         run: ./collect.sh Atlassian-Containers.txt
 
       - name: Install mkisofs
