@@ -38,6 +38,9 @@ jobs:
 
       - name: Run Collection Script for Container-Images.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
+        
+      - name: Copy README to ISO
+        run: cp -v README.md ${{ steps.vars.outputs.ROOTDIR }}/
 
       - name: Install mkisofs
         run: |
@@ -98,6 +101,9 @@ jobs:
 
       - name: Run Collection Script for Atlassian-Images.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
+
+      - name: Copy README to ISO
+        run: cp -v README.md ${{ steps.vars.outputs.ROOTDIR }}/
 
       - name: Install mkisofs
         run: |
