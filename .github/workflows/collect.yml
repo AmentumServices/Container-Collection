@@ -57,8 +57,10 @@ jobs:
         run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
       
       - name: Generate Hash
-        run: sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso|\
-         tee ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+        run: |
+          sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso >>\
+            ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+          cat ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
         run: ls -alh *.iso*
@@ -115,8 +117,10 @@ jobs:
         run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
 
       - name: Generate Hash
-        run: sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso|\
-          tee ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+        run: |
+          sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso >>\
+            ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+          cat ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
         run: ls -alh *.iso*
