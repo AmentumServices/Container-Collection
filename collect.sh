@@ -1,6 +1,18 @@
 #!/bin/bash
-ROOTDIR="Container-Collector"
-DEST="$ROOTDIR/$SRC"
+
+if [ $1 ]; then
+  if [ -f $1 ]; then
+    export ROOTDIR=${1/.txt/}
+    echo -e "\n$ROOTDIR"
+  else
+    echo "File $1 does not exist"
+    exit 2
+  fi
+else
+  echo -e "\nUsage Instructions:"
+  echo -e "\t $0 ListFile.txt"
+  exit 1
+fi
 
 if [ -d $ROOTDIR ];then
   echo "Directory exists.  Deleting."
@@ -11,6 +23,7 @@ mkdir $ROOTDIR
 
 while read SRC
 do
+  DEST="$ROOTDIR/$SRC"
   REPO="JacobsFederal/$SRC"
   echo -e "\nWorking with github repo $REPO"
   echo -e "Listing releases\n"
@@ -26,4 +39,11 @@ do
 
   ls -Alht $DEST
 
-done < RepoList.txt
+done < $1
+
+echo -e "\nDirectory Contents"
+ls -lAhS $ROOTDIR/*
+echo -e "\nDirectory Size"
+du -hd2 $ROOTDIR/*
+echo -e "\nDirectory Tree" 
+tree $ROOTDIR

@@ -7,8 +7,4 @@ Collector-Kaniko-IB
 Collector-Redis-IB
 Collector-RabbitMQ-IB
 Collector-Nexus-IB
-Collector-Atlassian-Jira-IB
-Collector-Atlassian-Confluence-IB
-Collector-Atlassian-Bitbucket-IB
-Collector-Atlassian-Support-IB
 Collector-CXCLI-IB

@@ -1,4 +1,4 @@
-Container-Collector/
+*[Cc]ontainer*/
 temp/
 venv/
 .vscode/
@@ -6,3 +6,4 @@ venv/
 *.tgz
 *.tar
 *.log
+*.iso
