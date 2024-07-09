@@ -1,0 +1,8 @@
+Container-Collector/
+temp/
+venv/
+.vscode/
+.env
+*.tgz
+*.tar
+*.log

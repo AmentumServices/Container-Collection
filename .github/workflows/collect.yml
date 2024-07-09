@@ -1,0 +1,70 @@
+name: Container-Collector
+run-name: ${{ github.actor }} is Collecting 🚀
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * 1" # Update weekly on Monday Midnight
+  workflow_dispatch:
+    
+jobs:
+  Date:
+    runs-on: ubuntu-latest
+    outputs:
+      Date: ${{ steps.date.outputs.date }}
+    steps:
+      - name: Get current date
+        id: DATE
+        run: |
+          echo "DATE=$(date '+%Y%m%d-%H%M')" >> $GITHUB_OUTPUT
+          echo -e "\n$GITHUB_OUTPUT\n"
+          cat $GITHUB_OUTPUT
+
+  Collect:
+    needs: [Date]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Run Collection Script
+        run: ./collect.sh
+
+      - name: Directory Contents
+        run: |
+          echo "Directory Contents"
+          ls -lAhS Container-Collector/*
+          echo -e "\nDirectory Size"
+          du -hd2 Container-Collector
+          echo -e "\nDirectory Tree" 
+          tree Container-Collector
+
+      - name: Install mkisofs
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y mkisofs
+      
+      - name: Make ISO
+        run: |
+          mkisofs -J -R -v -T -l \
+            -V '${{ vars.COLLECTOR }}-${{ needs.Date.outputs.Date }}' \
+            -A '${{ vars.COLLECTOR }}-${{ needs.Date.outputs.Date }}' \
+            -o ${{ vars.COLLECTOR }}-${{ needs.Date.outputs.Date }}.iso \
+            Container-Collector
+
+      - name: Show ISO
+        run: ls -alh *.iso
+        
+      - name: Send ISO to Sharepoint
+        uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
+        with:
+          file_path: "*.iso"
+          host_name: 'jacobsfederal.sharepoint.us'
+          site_name: 'USCMSNISSCII.DSO'
+          upload_path: '${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/'
+          tenant_id: ${{ secrets.SHAREPOINT_TENANT_ID }}
+          client_id: ${{ secrets.SHAREPOINT_APP_ID }}
+          client_secret: ${{ secrets.SHAREPOINT_APP_SECRET }}
+          login_endpoint: 'login.microsoftonline.us'
+          graph_endpoint: 'graph.microsoft.us'

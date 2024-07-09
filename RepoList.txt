@@ -1,0 +1,14 @@
+Collector-UBI-IB
+Collector-JDK-IB
+Collector-nginx-IB
+Collector-Maven-IB
+Collector-Skopeo-IB
+Collector-Kaniko-IB
+Collector-Redis-IB
+Collector-RabbitMQ-IB
+Collector-Nexus-IB
+Collector-Atlassian-Jira-IB
+Collector-Atlassian-Confluence-IB
+Collector-Atlassian-Bitbucket-IB
+Collector-Atlassian-Support-IB
+Collector-CXCLI-IB
