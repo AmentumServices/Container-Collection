@@ -42,7 +42,7 @@ jobs:
       - name: Install mkisofs
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y mkisofs
+          sudo apt-get install -y mkisofs isomd5sum
       
       - name: Make ISO
         run: |
@@ -52,7 +52,15 @@ jobs:
             -A '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
             -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
             ${{ steps.vars.outputs.ROOTDIR }}
+
+      - name: Implant MD5 sum into iso
+        run: implantmd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
       
+      - name: Generate Hash
+        run: sha256sum \
+          ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
+          | tee ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+
       - name: Show ISO & Hash
         run: ls -alh *.iso*
 
@@ -104,6 +112,9 @@ jobs:
             -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
             ${{ steps.vars.outputs.ROOTDIR }}
 
+      - name: Implant MD5 sum into iso
+        run: implantmd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
+        
       - name: Generate Hash
         run: sha256sum \
           ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
