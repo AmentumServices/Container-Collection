@@ -1,5 +1,5 @@
 name: Container-Collector
-run-name: ${{ github.actor }} is Collecting 🚀
+run-name: ${{ github.actor }} is Collecting Images 🚀
 on:
   push:
     branches:
