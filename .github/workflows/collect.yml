@@ -34,7 +34,7 @@ jobs:
         id: vars
         run: |
           echo "ROOTDIR=Container-Collection"
-          echo "ROOTDIR=$ROOTDIR" >> $GITHUB_OUTPUT
+          echo "ROOTDIR=Container-Collection" >> $GITHUB_OUTPUT
 
       - name: Run Collection Script for Container-Collection.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
@@ -46,12 +46,12 @@ jobs:
       
       - name: Make ISO
         run: |
-          echo -e "\nMaking ISO of $ROOTDIR"
+          echo -e "\nMaking ISO of ${{ steps.vars.outputs.ROOTDIR }}"
           mkisofs -J -R -v -T -l \
-            -V '$ROOTDIR-${{ needs.Date.outputs.Date }}' \
-            -A '$ROOTDIR-${{ needs.Date.outputs.Date }}' \
-            -o $ROOTDIR-${{ needs.Date.outputs.Date }}.iso \
-            $ROOTDIR
+            -V '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -A '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
+            ${{ steps.vars.outputs.ROOTDIR }}
 
       - name: Show ISO
         run: ls -alh *.iso
@@ -82,7 +82,7 @@ jobs:
         id: vars
         run: |
           echo "ROOTDIR=Atlassian-Containers"
-          echo "ROOTDIR=$ROOTDIR" >> $GITHUB_OUTPUT
+          echo "ROOTDIR=Atlassian-Containers" >> $GITHUB_OUTPUT
 
       - name: Run Collection Script for Container-Collection.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
@@ -94,12 +94,12 @@ jobs:
       
       - name: Make ISO
         run: |
-          echo -e "\nMaking ISO of $ROOTDIR"
+          echo -e "\nMaking ISO of ${{ steps.vars.outputs.ROOTDIR }}"
           mkisofs -J -R -v -T -l \
-            -V '$ROOTDIR-${{ needs.Date.outputs.Date }}' \
-            -A '$ROOTDIR-${{ needs.Date.outputs.Date }}' \
-            -o $ROOTDIR-${{ needs.Date.outputs.Date }}.iso \
-            $ROOTDIR
+            -V '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -A '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
+            ${{ steps.vars.outputs.ROOTDIR }}
 
       - name: Show ISO
         run: ls -alh *.iso
