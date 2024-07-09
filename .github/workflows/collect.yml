@@ -29,12 +29,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-
-      - name: Run Collection Script for Container-Collection.txt
+      
+      - name: Set ROOTDIR
         run: |
-          ./collect.sh Container-Collection.txt
-          echo "ROOTDIR=$ROOTDIR"
+          echo "ROOTDIR=Container-Collection"
           echo "ROOTDIR=$ROOTDIR" >> $GITHUB_ENV
+
+      - name: Run Collection Script for $ROOTDIR.txt
+        run: ./collect.sh $ROOTDIR.txt
 
       - name: Install mkisofs
         run: |

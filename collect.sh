@@ -2,7 +2,7 @@
 
 if [ $1 ]; then
   if [ -f $1 ]; then
-    export ROOTDIR=${1/.txt/}
+    ROOTDIR=${1/.txt/}
     echo -e "\n$ROOTDIR"
   else
     echo "File $1 does not exist"
@@ -26,8 +26,8 @@ do
   DEST="$ROOTDIR/$SRC"
   REPO="JacobsFederal/$SRC"
   echo -e "\nWorking with github repo $REPO"
-  echo -e "Listing releases\n"
-  gh release list -R $REPO
+  echo -e "Listing last 3 releases\n"
+  gh release list -R $REPO | head -n3
   echo -e "\nDownloading Latest to $DEST\n"
   gh release download -p "*" -D $DEST -R $REPO
   
