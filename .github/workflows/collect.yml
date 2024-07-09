@@ -52,14 +52,17 @@ jobs:
             -A '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
             -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
             ${{ steps.vars.outputs.ROOTDIR }}
+      
+      - name: Show ISO & Hash
+        run: ls -alh *.iso*
 
       - name: Show ISO
-        run: ls -alh *.iso
+        run: ls -alh *.iso*
         
       - name: Send ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
         with:
-          file_path: "*.iso"
+          file_path: "*.iso*"
           host_name: 'jacobsfederal.sharepoint.us'
           site_name: 'USCMSNISSCII.DSO'
           upload_path: '${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/'
@@ -101,13 +104,18 @@ jobs:
             -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
             ${{ steps.vars.outputs.ROOTDIR }}
 
-      - name: Show ISO
-        run: ls -alh *.iso
+      - name: Generate Hash
+        run: sha256sum \
+          ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
+          | tee ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+
+      - name: Show ISO & Hash
+        run: ls -alh *.iso*
         
       - name: Send ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
         with:
-          file_path: "*.iso"
+          file_path: "*.iso*"
           host_name: 'jacobsfederal.sharepoint.us'
           site_name: 'USCMSNISSCII.DSO'
           upload_path: '${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/'
