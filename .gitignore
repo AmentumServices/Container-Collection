@@ -2,8 +2,9 @@
 temp/
 venv/
 .vscode/
+.vagrant/
 .env
 *.tgz
 *.tar
 *.log
-*.iso
+*.iso*

@@ -67,9 +67,6 @@ jobs:
 
       - name: Show ISO & Hash
         run: ls -alh *.iso*
-
-      - name: Show ISO
-        run: ls -alh *.iso*
         
       - name: Send ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
