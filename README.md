@@ -1,5 +1,7 @@
 # What is this?
 
+[![Releasw](https://github.com/jacobsfederal/Container-Collection/actions/workflows/collect.yml/badge.svg?branch=main)](https://github.com/JacobsFederal/Container-Collection/actions/workflows/collect.yml)
+
 This is a project that automatically collects and creates artifacts to ease in air-gapped transfer of the catest conainer images from the internet.
 
 It runs actions as needed/manually, on GIT Commit Push, or automatically on Mondays at 00:00 
