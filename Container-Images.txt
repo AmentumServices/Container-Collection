@@ -6,6 +6,5 @@ Collector-Skopeo-IB
 Collector-Kaniko-IB
 Collector-Redis-IB
 Collector-RabbitMQ-IB
-Collector-Nexus-IB
 Collector-CXCLI-IB
 Collector-SonarQube-CLI-IB

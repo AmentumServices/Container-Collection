@@ -23,13 +23,13 @@ In this case, it:
 - Kaniko latest images from DSO.mil IronBank
 - Redis latest images from DSO.mil IronBank
 - RabbitMQ latest images from DSO.mil IronBank
-- Sonatype Nexus latest images from DSO.mil IronBank
 - Checkmarx CXCLI latest images from DSO.mil IronBank
 - SonarQube Scanner CLI images from DSO.mil IronBank
 
-### Disk 2 - _Atlassian-Images-\<DATE>.iso_
+### Disk 2 - _Application-Images-\<DATE>.iso_
 
 - Atlassian Jira latest images from DSO.mil IronBank
 - Atlassian Confluence latest images from DSO.mil IronBank
 - Atlassian Bitbucket latest images from DSO.mil IronBank
 - Atlassian Support latest images from DSO.mil IronBank
+- Sonatype Nexus latest images from DSO.mil IronBank
