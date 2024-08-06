@@ -25,6 +25,7 @@ In this case, it:
 - RabbitMQ latest images from DSO.mil IronBank
 - Sonatype Nexus latest images from DSO.mil IronBank
 - Checkmarx CXCLI latest images from DSO.mil IronBank
+- SonarQube Scanner CLI images from DSO.mil IronBank
 
 ### Disk 2 - _Atlassian-Images-\<DATE>.iso_
 
