@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: "0 0 * * 1" # Update weekly on Monday Midnight
   workflow_dispatch:
-    
+
 jobs:
   Date:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
           echo -e "\n$GITHUB_OUTPUT\n"
           cat $GITHUB_OUTPUT
 
-  Container-Images:
+  Base-Images:
     needs: [Date]
     runs-on: ubuntu-latest
     env:
@@ -29,16 +29,16 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      
+
       - name: Set ROOTDIR
         id: vars
         run: |
-          echo "ROOTDIR=Container-Images"
-          echo "ROOTDIR=Container-Images" >> $GITHUB_OUTPUT
+          echo "ROOTDIR=Base-Images"
+          echo "ROOTDIR=Base-Images" >> $GITHUB_OUTPUT
 
       - name: Run Collection Script for Container-Images.txt
         run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
-        
+
       - name: Copy README to ISO
         run: cp -v README.md ${{ steps.vars.outputs.ROOTDIR }}/
 
@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y mkisofs isomd5sum
-      
+
       - name: Make ISO
         run: |
           echo -e "\nMaking ISO of ${{ steps.vars.outputs.ROOTDIR }}"
@@ -58,7 +58,7 @@ jobs:
 
       - name: Implant MD5 sum into iso
         run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
-      
+
       - name: Generate Hash
         run: |
           sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso >>\
@@ -67,19 +67,79 @@ jobs:
 
       - name: Show ISO & Hash
         run: ls -alh *.iso*
-        
+
       - name: Send ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
         with:
           file_path: "*.iso*"
-          host_name: 'jacobsfederal.sharepoint.us'
-          site_name: 'USCMSNISSCII.DSO'
-          upload_path: '${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/'
+          host_name: "jacobsfederal.sharepoint.us"
+          site_name: "USCMSNISSCII.DSO"
+          upload_path: "${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/"
           tenant_id: ${{ secrets.SHAREPOINT_TENANT_ID }}
           client_id: ${{ secrets.SHAREPOINT_APP_ID }}
           client_secret: ${{ secrets.SHAREPOINT_APP_SECRET }}
-          login_endpoint: 'login.microsoftonline.us'
-          graph_endpoint: 'graph.microsoft.us'
+          login_endpoint: "login.microsoftonline.us"
+          graph_endpoint: "graph.microsoft.us"
+
+  Pipeline-Images:
+    needs: [Date]
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set ROOTDIR
+        id: vars
+        run: |
+          echo "ROOTDIR=Pipeline-Images"
+          echo "ROOTDIR=Pipeline-Images" >> $GITHUB_OUTPUT
+
+      - name: Run Collection Script for Container-Images.txt
+        run: ./collect.sh ${{ steps.vars.outputs.ROOTDIR }}.txt
+
+      - name: Copy README to ISO
+        run: cp -v README.md ${{ steps.vars.outputs.ROOTDIR }}/
+
+      - name: Install mkisofs
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y mkisofs isomd5sum
+
+      - name: Make ISO
+        run: |
+          echo -e "\nMaking ISO of ${{ steps.vars.outputs.ROOTDIR }}"
+          mkisofs -J -R -v -T -l \
+            -V '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -A '${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}' \
+            -o ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso \
+            ${{ steps.vars.outputs.ROOTDIR }}
+
+      - name: Implant MD5 sum into iso
+        run: implantisomd5 ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso
+
+      - name: Generate Hash
+        run: |
+          sha256sum -b ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso >>\
+            ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+          cat ${{ steps.vars.outputs.ROOTDIR }}-${{ needs.Date.outputs.Date }}.iso.sha
+
+      - name: Show ISO & Hash
+        run: ls -alh *.iso*
+
+      - name: Send ISO to Sharepoint
+        uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
+        with:
+          file_path: "*.iso*"
+          host_name: "jacobsfederal.sharepoint.us"
+          site_name: "USCMSNISSCII.DSO"
+          upload_path: "${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/"
+          tenant_id: ${{ secrets.SHAREPOINT_TENANT_ID }}
+          client_id: ${{ secrets.SHAREPOINT_APP_ID }}
+          client_secret: ${{ secrets.SHAREPOINT_APP_SECRET }}
+          login_endpoint: "login.microsoftonline.us"
+          graph_endpoint: "graph.microsoft.us"
 
   Atlassian-Images:
     needs: [Date]
@@ -106,7 +166,7 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y mkisofs isomd5sum
-      
+
       - name: Make ISO
         run: |
           echo -e "\nMaking ISO of ${{ steps.vars.outputs.ROOTDIR }}"
@@ -127,16 +187,16 @@ jobs:
 
       - name: Show ISO & Hash
         run: ls -alh *.iso*
-        
+
       - name: Send ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1
         with:
           file_path: "*.iso*"
-          host_name: 'jacobsfederal.sharepoint.us'
-          site_name: 'USCMSNISSCII.DSO'
-          upload_path: '${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/'
+          host_name: "jacobsfederal.sharepoint.us"
+          site_name: "USCMSNISSCII.DSO"
+          upload_path: "${{ vars.SHAREPOINT_BASEPATH }}/${{ vars.COLLECTOR }}/"
           tenant_id: ${{ secrets.SHAREPOINT_TENANT_ID }}
           client_id: ${{ secrets.SHAREPOINT_APP_ID }}
           client_secret: ${{ secrets.SHAREPOINT_APP_SECRET }}
-          login_endpoint: 'login.microsoftonline.us'
-          graph_endpoint: 'graph.microsoft.us'
+          login_endpoint: "login.microsoftonline.us"
+          graph_endpoint: "graph.microsoft.us"
