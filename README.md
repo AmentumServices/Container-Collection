@@ -11,11 +11,14 @@ In this case, it:
 
 ## Images include:
 
-### Disk 1 - _Container-Images-\<DATE>.iso_
+### Disk 1 - _Base-Images-\<DATE>.iso_
 
 - UBI 8 & 9 latest images from DSO.mil IronBank
 - JDK 8, 11, & 17 latest images from DSO.mil IronBank
 - nginx latest images from DSO.mil IronBank
+
+### Disk 2 - _Pipeline-Images-\<DATE>.iso_
+
 - Maven latest images from DSO.mil IronBank
 - Skopeo latest images from DSO.mil IronBank
 - Kaniko latest images from DSO.mil IronBank
@@ -23,8 +26,9 @@ In this case, it:
 - RabbitMQ latest images from DSO.mil IronBank
 - Sonatype Nexus latest images from DSO.mil IronBank
 - Checkmarx CXCLI latest images from DSO.mil IronBank
+- Keysight Eggplant Fusion Engine latest images from DSO.mil IronBank
 
-### Disk 2 - _Atlassian-Images-\<DATE>.iso_
+### Disk 3 - _Atlassian-Images-\<DATE>.iso_
 
 - Atlassian Jira latest images from DSO.mil IronBank
 - Atlassian Confluence latest images from DSO.mil IronBank

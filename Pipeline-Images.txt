@@ -1,0 +1,5 @@
+Collector-Maven-IB
+Collector-Skopeo-IB
+Collector-Kaniko-IB
+Collector-CXCLI-IB
+Collector-EggplantFusion-IB
