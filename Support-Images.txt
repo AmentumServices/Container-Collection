@@ -1,1 +1,1 @@
-Collector-PlantUML-IB
+Collector-PlantUML
