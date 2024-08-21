@@ -28,7 +28,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     strategy:
         matrix:
-            set: [Base-Images, Pipeline-Images, Atlassian-Images]
+            set: [Base-Images, Pipeline-Images, Atlassian-Images, Service-Images, Support-Images]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
           cat ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
-        run: ls -alh *.iso*
+        run: ls -Alh *.iso*
 
       - name: Send ${{ matrix.set }} ISO to Sharepoint
         uses: JacobsFederal/sharepoint-file-upload-action@pappasjfed-patch-1

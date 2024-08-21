@@ -28,7 +28,17 @@ In this case, it:
 - Checkmarx CXCLI latest images from DSO.mil IronBank
 - Keysight Eggplant Fusion Engine latest images from DSO.mil IronBank
 
-### Disk 3 - _Atlassian-Images-\<DATE>.iso_
+### Disk 3 - _Service-Images-\<DATE>.iso_
+
+- Redis Latest images from DSO.mil Ironbank
+- RabbitMQ Latest images from DSO.mil Ironbank
+- Nexus Latest images from DSO.mil Ironbank
+
+### Disk 4 - _Support-Images-\<DATE>.iso_
+
+- PlantUML Software for UML Diagramming
+
+### Disk 5 - _Atlassian-Images-\<DATE>.iso_
 
 - Atlassian Jira latest images from DSO.mil IronBank
 - Atlassian Confluence latest images from DSO.mil IronBank
