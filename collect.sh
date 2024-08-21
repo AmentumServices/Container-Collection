@@ -19,6 +19,7 @@ if [ -d $ROOTDIR ];then
   rm -rf $ROOTDIR
 fi
 
+echo -e "\nCollecting:\n$(cat $1)"
 mkdir $ROOTDIR
 
 while read SRC
@@ -38,12 +39,16 @@ do
   fi
 
   ls -Alht $DEST/*
-
 done < $1
 
 echo -e "\nDirectory Contents"
 ls -lAhS $ROOTDIR/*
 echo -e "\nDirectory Size"
 du -hd2 $ROOTDIR/*
-echo -e "\nDirectory Tree" 
-tree $ROOTDIR
+
+if [ $(command -v tree) ]; then
+  echo -e "\nDirectory Tree" 
+  tree $ROOTDIR
+else
+  echo -e "\nTree not installed"
+fi 
