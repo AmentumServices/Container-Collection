@@ -35,7 +35,7 @@ echo "Implant MD5 sum into iso"
 implantisomd5 $ROOTDIR-$DATE.iso
 
 echo "Generate Hash"
-sha256sum -b $ROOTDIR-$DATE.iso >>\
+sha256sum -b $ROOTDIR-$DATE.iso | tee \
   $ROOTDIR-$DATE.iso.sha
 cat $ROOTDIR-$DATE.iso.sha
 
