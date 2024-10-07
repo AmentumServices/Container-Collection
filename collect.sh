@@ -43,7 +43,7 @@ do
 done < $1
 
 if [ $(command -v tree) ]; then
-  echo -e "\n\nDirectory Tree" 
+  echo -e "\nDirectory Tree" 
   tree $ROOTDIR
 else
   echo -e "\nTree not installed"
