@@ -29,26 +29,27 @@ do
   echo -e "\nWorking with github repo $REPO"
   echo -e "Listing last 3 releases\n"
   gh release list -R $REPO | head -n3
-  echo -e "\nDownloading Latest to $DEST\n"
+  echo -e "\nDownloading Latest to $DEST"
   gh release download -p "*" -D $DEST -R $REPO
   
   if [ $? ];then
-    echo -e "Download Complete!"
+    echo -e "\nDownload Complete!"
   else
-    echo "ERROR!"
+    echo -e "\n\n************************ ERROR! ************************\n\n"
   fi
 
-  ls -Alht $DEST/*
+  echo -e "\nDirectory Contents"
+  ls -AlhtS $DEST/*
 done < $1
 
-echo -e "\nDirectory Contents"
-ls -lAhS $ROOTDIR/*
-echo -e "\nDirectory Size"
-du -hd2 $ROOTDIR/*
-
 if [ $(command -v tree) ]; then
-  echo -e "\nDirectory Tree" 
+  echo -e "\n\nDirectory Tree" 
   tree $ROOTDIR
 else
   echo -e "\nTree not installed"
-fi 
+fi
+
+echo -e "\nDirectory $ROOTDIR Size"
+du -hd1 $ROOTDIR
+echo -e "\nSubdirectory Sizes"
+du -hd2 $ROOTDIR/*
