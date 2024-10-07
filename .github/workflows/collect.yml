@@ -1,4 +1,4 @@
-name: Container-Collector
+name: Container-Collection
 run-name: ${{ github.actor }} is Collecting Images 🚀
 on:
   push:
