@@ -46,7 +46,7 @@ jobs:
 
       - name: Make ${{ matrix.set }} ISO
         run: |
-          echo -e "\nMaking ISO of ${{ matrix.set }}"
+          echo "Making ISO of ${{ matrix.set }}"
           mkisofs -J -R -v -T -l \
             -V '${{ matrix.set }}-${{ needs.Date.outputs.Date }}' \
             -A '${{ matrix.set }}-${{ needs.Date.outputs.Date }}' \
@@ -60,7 +60,6 @@ jobs:
         run: |
           sha256sum -b ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso | tee \
             ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.sha
-          cat ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
         run: ls -Alh *.iso*
