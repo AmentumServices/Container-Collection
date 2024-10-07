@@ -26,14 +26,14 @@ while read SRC
 do
   DEST="$ROOTDIR/$SRC"
   REPO="amentumservices/$SRC"
-  echo -e "\nWorking with github repo $REPO"
-  echo -e "Listing last 3 releases\n"
+  echo -e "\nWorking with github repo $REPO\n"
+  echo -e "Listing last 3 releases"
   gh release list -R $REPO | head -n3
   echo -e "\nDownloading Latest to $DEST"
   gh release download -p "*" -D $DEST -R $REPO
   
   if [ $? ];then
-    echo -e "\nDownload Complete!"
+    echo -e "Download Complete!"
   else
     echo -e "\n\n************************ ERROR! ************************\n\n"
   fi
