@@ -23,20 +23,21 @@ In this case, it:
 - Maven latest images from DSO.mil IronBank
 - Skopeo latest images from DSO.mil IronBank
 - Kaniko latest images from DSO.mil IronBank
-- Redis latest images from DSO.mil IronBank
-- RabbitMQ latest images from DSO.mil IronBank
-- Sonatype Nexus latest images from DSO.mil IronBank
 - Checkmarx CXCLI latest images from DSO.mil IronBank
 - Keysight Eggplant Fusion Engine latest images from DSO.mil IronBank
 
 ### Disk 3 - _Service-Images-\<DATE>.iso_
 
+- PostGRE SQL Latest images from DSO.mil Ironbank
+- Kafka Latest images from DSO.mil Ironbank
 - Redis Latest images from DSO.mil Ironbank
+- Sonatype Nexus latest images from DSO.mil IronBank
 - RabbitMQ Latest images from DSO.mil Ironbank
-- Nexus Latest images from DSO.mil Ironbank
 
 ### Disk 4 - _Support-Images-\<DATE>.iso_
 
+- K9s CLI for K8s Cluster management
+- Helm CLI for K8s Helm Chart Management
 - PlantUML Software for UML Diagramming
 
 ### Disk 5 - _Atlassian-Images-\<DATE>.iso_
