@@ -33,9 +33,11 @@ In this case, it:
 - Redis Latest images from DSO.mil Ironbank
 - Sonatype Nexus latest images from DSO.mil IronBank
 - RabbitMQ Latest images from DSO.mil Ironbank
+- ArgoCD Latest images from DSO.mil Ironbank
 
 ### Disk 4 - _Support-Images-\<DATE>.iso_
 
+- KinD for K8s Cluster Testing
 - K9s CLI for K8s Cluster management
 - Helm CLI for K8s Helm Chart Management
 - PlantUML Software for UML Diagramming
