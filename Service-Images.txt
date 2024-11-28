@@ -3,3 +3,4 @@ Collector-Kafka-IB
 Collector-Redis-IB
 Collector-RabbitMQ-IB
 Collector-Nexus-IB
+Collector-ArgoCD-IB
