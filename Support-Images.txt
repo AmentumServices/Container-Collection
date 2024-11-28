@@ -1,3 +1,4 @@
 Collector-PlantUML
 Collector-k9s-CLI
 Collector-Helm-IB
+Collector-KinD
