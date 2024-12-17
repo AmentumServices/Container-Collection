@@ -24,6 +24,7 @@ In this case, it:
 - Skopeo latest images from DSO.mil IronBank
 - Kaniko latest images from DSO.mil IronBank
 - Checkmarx CXCLI latest images from DSO.mil IronBank
+- Checkmarx OWASP ZAP latest image from DSO.mil IronBank
 - Keysight Eggplant Fusion Engine latest images from DSO.mil IronBank
 
 ### Disk 3 - _Service-Images-\<DATE>.iso_
