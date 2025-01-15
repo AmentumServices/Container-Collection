@@ -10,7 +10,7 @@ on:
 
 jobs:
   Date:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       Date: ${{ steps.date.outputs.date }}
     steps:
@@ -23,7 +23,7 @@ jobs:
 
   Collect-Images:
     needs: [Date]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       GH_TOKEN: ${{ github.token }}
     strategy:
@@ -47,13 +47,13 @@ jobs:
       - name: ISO Table of contents
         run: |
           tree -a ${{ matrix.set }} \
-            | tee ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
+            | tee ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.txt
 
       - name: Upload iso ToC artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
-          path: ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
+          name: ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.txt
+          path: ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.txt
           if-no-files-found: error
 
       - name: Make ${{ matrix.set }} ISO
