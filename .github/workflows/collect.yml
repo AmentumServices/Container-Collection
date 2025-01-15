@@ -44,6 +44,18 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y mkisofs isomd5sum
 
+      - name: ISO Table of contents
+        run: |
+          tree -a ${{ matrix.set }} \
+            | tee ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
+
+      - name: Upload iso ToC artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
+          path: ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Setup.outputs.Date }}.iso.txt
+          if-no-files-found: error
+
       - name: Make ${{ matrix.set }} ISO
         run: |
           echo "Making ISO of ${{ matrix.set }}"
