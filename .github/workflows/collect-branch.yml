@@ -75,19 +75,3 @@ jobs:
 
       - name: Show ISO & Hash
         run: ls -Alh *.iso*
-
-
-  Release:
-    runs-on: ubuntu-latest
-    needs: [Date, Collect-Images]
-    permissions:
-      contents: write
-      pull-requests: read
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          merge-multiple: true
-
-      - name: Show Artifacts
-        run: ls -Alh ${{ vars.COLLECTOR }}-*.*
