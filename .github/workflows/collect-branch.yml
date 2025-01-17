@@ -90,4 +90,4 @@ jobs:
           merge-multiple: true
 
       - name: Show Artifacts
-        run: ls -Alh ${{ vars.COLLECTOR }}-*.*
+        run: ls -Alh *
