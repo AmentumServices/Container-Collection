@@ -25,7 +25,7 @@ mkdir $ROOTDIR
 while read SRC
 do
   DEST="$ROOTDIR/$SRC"
-  REPO="amentumservices/$SRC"
+  REPO="amentumcms/$SRC"
   echo -e "\nWorking with github repo $REPO\n"
   echo -e "Listing last 3 releases"
   gh release list -R $REPO | head -n3
