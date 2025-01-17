@@ -58,8 +58,8 @@ jobs:
 
       - name: Directory Contents and Disc usage
         run: |
-          echo -e "\nListing: $(ls -Alh ${{ matrix.set }}/*)"
-          echo -e "\nDisk Usage: $(du -hd1 ${{ matrix.set }}/*)"
+          echo -e "\nListing:\n$(ls -A1h ${{ matrix.set }}/*)"
+          echo -e "\nDisk Usage:\n$(du -hd1 ${{ matrix.set }}/*)"
 
       - name: Make ${{ matrix.set }} ISO
         run: |
@@ -100,14 +100,19 @@ jobs:
     permissions:
       contents: write
       pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
 
       - name: Show Artifacts
-        run: ls -Alh *
+        run: ls -A1h *.iso.txt
 
       - name: Set up git
         run: |
@@ -131,4 +136,4 @@ jobs:
           tag_name: ${{ needs.Date.outputs.Date }}
           make_latest: true
           files: |
-            *.txt
+            *.iso.txt
