@@ -56,7 +56,7 @@ jobs:
           path: ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.txt
           if-no-files-found: error
 
-      - name: Show ISO & Hash
+      - name: Directory Contents and Disc usage
         run: |
           echo -e "\nListing: $(ls -Alh ${{ matrix.set }}/*)"
           echo -e "\nDisk Usage: $(du -hd1 ${{ matrix.set }}/*)"
