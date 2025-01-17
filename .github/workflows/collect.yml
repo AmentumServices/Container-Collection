@@ -94,7 +94,7 @@ jobs:
     needs: [Date, Collect-Images]
     permissions:
       contents: write
-      pull-requests: read
+      pull-requests: readhttps://github.com/AmentumCMS/Container-Collection/pull/1/conflict?name=.github%252Fworkflows%252Fcollect.yml&ancestor_oid=2794483133489f43518e9d0e681f0c23d8f6f991&base_oid=35117e09166d16f4ec8c4425652238c4d19f18fb&head_oid=3803354973fc797936ec0eecdd196aed608f8643
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
@@ -126,3 +126,4 @@ jobs:
           tag_name: ${{ needs.Date.outputs.Date }}
           make_latest: true
           files: *
+
