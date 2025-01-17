@@ -125,5 +125,4 @@ jobs:
           name: ${{ vars.COLLECTOR }} ${{ needs.Date.outputs.Date }}
           tag_name: ${{ needs.Date.outputs.Date }}
           make_latest: true
-          files: |
-            ${{ vars.COLLECTOR }}-${{ needs.Date.outputs.Date }}*.*
+          files: *
