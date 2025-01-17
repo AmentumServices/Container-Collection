@@ -56,6 +56,11 @@ jobs:
           path: ${{ matrix.set }}/${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.txt
           if-no-files-found: error
 
+      - name: Show ISO & Hash
+        run: |
+          echo -e "\nListing: $(ls -Alh ${{ matrix.set }}/*)"
+          echo -e "\nDisk Usage: $(du -hd1 ${{ matrix.set }}/*)"
+
       - name: Make ${{ matrix.set }} ISO
         run: |
           echo "Making ISO of ${{ matrix.set }}"
@@ -77,7 +82,7 @@ jobs:
         run: ls -Alh *.iso*
 
   Release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [Date, Collect-Images]
     permissions:
       contents: write
