@@ -40,4 +40,4 @@ sha256sum -b $ROOTDIR-$DATE.iso | tee \
 cat $ROOTDIR-$DATE.iso.sha
 
 echo "Show ISO & Hash"
-ls -Alh *.iso*
+ls -Alht *.iso*

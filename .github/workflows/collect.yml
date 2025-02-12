@@ -79,7 +79,7 @@ jobs:
             ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
-        run: ls -Alh *.iso*
+        run: ls -Alht *.iso*
 
       - name: Send ${{ matrix.set }} ISO to Sharepoint
         uses: amentumcms/sharepoint-file-upload-action@pappasjfed-patch-1
@@ -110,10 +110,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
+          pattern: "*.txt"
 
       - name: Show Artifacts
-        run: ls -A1h *.iso.txt
+        run: ls -A1h *.txt
 
+      # Create Release
       - name: Set up git
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
@@ -136,4 +138,4 @@ jobs:
           tag_name: ${{ needs.Date.outputs.Date }}
           make_latest: true
           files: |
-            *.iso.txt
+            *.txt
