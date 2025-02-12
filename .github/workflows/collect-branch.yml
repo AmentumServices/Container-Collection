@@ -79,7 +79,7 @@ jobs:
             ${{ matrix.set }}-${{ needs.Date.outputs.Date }}.iso.sha
 
       - name: Show ISO & Hash
-        run: ls -Alh *.iso*
+        run: ls -Alht *.iso*
 
   Release:
     runs-on: ubuntu-24.04
@@ -97,6 +97,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
+          pattern: "*.txt"
 
       - name: Show Artifacts
-        run: ls -A1h *.iso.txt
+        run: ls -A1h *.txt
+
+      # Create Release
